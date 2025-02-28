@@ -1,80 +1,83 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>用户注册</title>
-  <style>
-    table {
-      border-collapse: collapse;
-    }
-
-    table,
-    th,
-    td {
-      border: none;
-    }
-  </style>
-</head>
-
+<html>
 <body>
-  <form>
-    <table>
-      <tr>
-        <td><label for="username">用户名称:</label></td>
-        <td><input type="text" id="username" name="username" value="zhangsan"></td>
-      </tr>
-      <tr>
-        <td><label for="password">用户密码:</label></td>
-        <td><input type="password" id="password" name="password"></td>
-      </tr>
-      <tr>
-        <td><label for="gender">用户性别:</label></td>
-        <td>
-          <input type="radio" id="male" name="gender" value="male" checked>
-          <label for="male">男</label>
-          <input type="radio" id="female" name="gender" value="female">
-          <label for="female">女</label>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="hobbies">爱好:</label></td>
-        <td>
-          <input type="checkbox" id="football" name="hobbies" value="football">
-          <label for="football">足球</label>
-          <input type="checkbox" id="basketball" name="hobbies" value="basketball">
-          <label for="basketball">篮球</label>
-          <input type="checkbox" id="lol" name="hobbies" value="lol">
-          <label for="lol">LOL</label>
-          <input type="checkbox" id="kdrama" name="hobbies" value="kdrama">
-          <label for="kdrama">韩剧</label>
-          <input type="checkbox" id="honor" name="hobbies" value="honor">
-          <label for="honor">王者荣耀</label>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="email">邮箱:</label></td>
-        <td><input type="email" id="email" name="email" placeholder="请输入您的邮箱"></td>
-      </tr>
-      <tr>
-        <td><label for="avatar">用户头像:</label></td>
-        <td><input type="file" id="avatar" name="avatar"></td>
-      </tr>
-      <tr>
-        <td><label for="address">您的家庭住址是:</label></td>
-        <td>
-          <select id="address" name="address">
-            <option value="shanxi">陕西</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="suggestion">您的建议或者意见:</label></td>
-        <td><textarea id="suggestion" name="suggestion" placeholder="您的建议或者意见"></textarea></td>
-      </tr>
-    </table>
-  </form>
-</body>
-
-</html>
+<p>
+	<span style="font-size:20px;"><span style="font-family:comic sans ms,cursive;">Student Information Form</span></span></p>
+<p>
+	<span style="font-family:comic sans ms,cursive;"><span style="font-size:11px;"><span style="font-size:10px;"><span style="font-size:12px;"><span style="font-size:14px;"><span style="font-size:16px;"><span style="font-size:12px;"><span style="font-size:11px;"><span style="font-size:14px;">Student Id&nbsp; &nbsp;</span> &nbsp;&nbsp;<input maxlength="13" name="studentid" type="text" value="D10000000" /> &nbsp;</span></span></span></span></span></span></span></span></p>
+<p>
+	<span style="font-family:comic sans ms,cursive;"><span style="font-size:11px;"><span style="font-size:10px;"><span style="font-size:12px;"><span style="font-size:14px;"><span style="font-size:16px;"><span style="font-size:12px;"><span style="font-size:11px;"><span style="font-size:14px;">Name&nbsp; &nbsp; &nbsp; &nbsp; </span>&nbsp; &nbsp; &nbsp;&nbsp;<input maxlength="50" name="sname" type="text" value="e.g.John Smith" />&nbsp;</span></span></span></span></span></span></span></span></p>
+<p>
+	<span style="font-size:14px;">Gender&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input name="gender" type="radio" value="male" />Male&nbsp;<input name="gender" type="radio" value="female" />Female</span></p>
+<p>
+	<span style="font-size:14px;">Habbits&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<input name="swimming" type="checkbox" value="1" />Swimming&nbsp;&nbsp;<input name="swimming" type="checkbox" value="1" />Ping pong&nbsp; &nbsp;&nbsp;<input name="swimming" type="checkbox" value="1" />Guitar</span></p>
+<p>
+	<span style="font-size:14px;">Major&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<select name="major" size="1"><option value="mathematics">mathematics</option><option value="physics">physics</option><option value="biology">biology</option></select></span></p>
+<p>
+	City&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<select name="city" size="1"><option value="Hangzhou">Hangzhou</option><option value="Ningbo">Ningbo</option><option value="Shaoxing ">Shaoxing</option></select><input maxlength="20" name="city" type="text" /></p>
+<p>
+	Inter Experience<textarea cols="20" name="intern" rows="14" style="width: 513px; height: 110px;"></textarea></p>
+<p>
+	<input name="submit" type="button" value="submit" /></p>
+<p>
+	&nbsp;</p>
+<table align="center" border="1" cellpadding="4" cellspacing="3" style="width:90%;">
+	<tbody>
+		<tr>
+			<td>
+				Student Id&nbsp;</td>
+			<td>
+				12</td>
+		</tr>
+		<tr>
+			<td>
+				<span style="font-family: &quot;comic sans ms&quot;, cursive; font-size: 14px;">Name&nbsp;&nbsp;</span></td>
+			<td>
+				22</td>
+		</tr>
+		<tr>
+			<td>
+				<span style="font-family: &quot;comic sans ms&quot;, cursive; font-size: 14px;">Gender</span></td>
+			<td>
+				32</td>
+		</tr>
+		<tr>
+			<td>
+				<span style="font-size: 14px;">Habbits</span></td>
+			<td>
+				42</td>
+		</tr>
+		<tr>
+			<td>
+				<span style="font-size: 14px;">Major&nbsp;</span></td>
+			<td>
+				52</td>
+		</tr>
+		<tr>
+			<td>
+				City</td>
+			<td>
+				62</td>
+		</tr>
+		<tr>
+			<td>
+				Inter Experience</td>
+			<td>
+				72</td>
+		</tr>
+		<tr>
+			<td>
+				81</td>
+			<td>
+				82</td>
+		</tr>
+		<tr>
+			<td>
+				91</td>
+			<td>
+				92</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	&nbsp;</p>
+</body></html>
