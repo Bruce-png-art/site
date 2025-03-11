@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* 设置 body 样式，让内容居中显示 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            perspective: 1000px;
+        }
+
+        /* 立方体容器样式 */
+        .cube {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            animation: rotate 10s infinite linear;
+        }
+
+        /* 定义旋转动画 */
+        @keyframes rotate {
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        /* 立方体每个面的通用样式 */
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            opacity: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        /* 前面样式 */
+        .front {
+            background-color: #ff0000;
+            transform: translateZ(100px);
+        }
+
+        /* 后面样式 */
+        .back {
+            background-color: #00ff00;
+            transform: rotateY(180deg) translateZ(100px);
+        }
+
+        /* 顶面样式 */
+        .top {
+            background-color: #0000ff;
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        /* 底面样式 */
+        .bottom {
+            background-color: #ffff00;
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+
+        /* 左面样式 */
+        .left {
+            background-color: #ff00ff;
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        /* 右面样式 */
+        .right {
+            background-color: #00ffff;
+            transform: rotateY(90deg) translateZ(100px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cube">
+        <div class="face front">Front</div>
+        <div class="face back">Back</div>
+        <div class="face top">Top</div>
+        <div class="face bottom">Bottom</div>
+        <div class="face left">Left</div>
+        <div class="face right">Right</div>
+    </div>
+</body>
+
+</html>
