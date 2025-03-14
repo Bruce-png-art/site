@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    /* 定义椭圆样式 */
+   .animated-ellipse {
+      width: 200px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #ff0000, #00ff00, #0000ff);
+      animation: gradientAnimation 5s infinite alternate;
+      margin: 20px auto;
+    }
+
+    /* 定义动画关键帧 */
+    @keyframes gradientAnimation {
+      0% {
+        background: radial-gradient(circle at center, #ff0000, #00ff00, #0000ff);
+      }
+      100% {
+        background: radial-gradient(circle at center, #0000ff, #00ff00, #ff0000);
+      }
+    }
+
+    /* 简历容器样式 */
+   .resume {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+
+    /* 简历标题样式 */
+   .resume-title {
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+
+    /* 头像样式 */
+   .resume-avatar {
+      grid-column: 4;
+      grid-row: 2 / span 3;
+    }
+
+   .resume-avatar img {
+      width: 100%;
+    }
+
+    /* 内容区域跨列样式 */
+   .resume-content-span {
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 带有动画径向渐变背景的椭圆 -->
+  <div class="animated-ellipse"></div>
+
+  <div class="resume">
+    <!-- 简历标题 -->
+    <h1 class="resume-title">个人简历</h1>
+
+    <!-- 基本信息 -->
+    <div>姓 名</div>
+    <div>简小丽</div>
+    <div>年 龄</div>
+    <div>26</div>
+    <div>性 别</div>
+    <div>女</div>
+    <div>地 址</div>
+    <div>湖南 长沙 岳麓区</div>
+    <div>电 话</div>
+    <div>135-0000-0000</div>
+    <div>婚姻状况</div>
+    <div>已婚</div>
+
+    <!-- 头像 -->
+    <div class="resume-avatar">
+      <img src="img.jpg" alt="头像">
+    </div>
+
+    <!-- 求职意向 -->
+    <div class="resume-content-span">
+      <div>求职意向</div>
+      <div>区域经理</div>
+    </div>
+
+    <!-- 工作经历 -->
+    <div class="resume-content-span">
+      <div>工作经历</div>
+      <div>
+        <ul>
+          <li>一、社区服务站慢病管理员
+            <ol>
+              <li>负责为客户进行体检并解读体检结果。</li>
+              <li>评估客户的健康状况和所患疾病危险性；进行健康咨询与指导。</li>
+              <li>对患者进行糖尿病、高血压检测工作。</li>
+            </ol>
+          </li>
+          <li>二、药店店员（工作经验四年）
+            <ol>
+              <li>负责接待顾客的咨询，了解顾客的需求并达成销售；</li>
+              <li>负责做好货品销售记录、盘点、账目核对等工作，按规定完成各项销售统计工作；</li>
+              <li>完成商品的来货验收、上架陈列摆放、补货、退货、防损等日常营业工作；</li>
+              <li>做好所负责区域的卫生清洁工作；</li>
+              <li>了解公司下达的销售任务指标，进行销售任务的分解；</li>
+              <li>对商品的价格、产地等做到了如指掌。</li>
+            </ol>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 教育经历 -->
+    <div class="resume-content-span">
+      <div>教育经历</div>
+      <div>中专学历 （本人学历不高，正在就读成人高考）</div>
+    </div>
+
+    <!-- 社会关系 -->
+    <div class="resume-content-span">
+      <div>社会关系</div>
+      <div>
+        <ul>
+          <li>家人从事教育行业老师和学校领导等工作。</li>
+          <li>本人对象与很多老板是朋友关系，具有一定的社会关系。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 自我评价 -->
+    <div class="resume-content-span">
+      <div>自我评价</div>
+      <div>
+        <ul>
+          <li>对于市场具有一定的观察诊断能力，了解当地市场人流量、竞争情况、消费喜好、消费者分布情况。</li>
+          <li>对于产品、人员、价格等具有一定的管理能力。</li>
+          <li>对于营销知识及品牌知识等具有一定的了解。</li>
+          <li>具有一定的会预测、分析、洞察和规划布局等能力。</li>
+          <li>能快速了解公司营销方案并执行等能力。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p style="text-align: center; margin-top: 20px;">文字版</p>
+
+</body>
+
+</html>
