@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Balloons</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #87CEEB;
+        }
+
+       .balloon {
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        const numBalloons = 10;
+        const colors = ['#FF69B4', '#FFD700', '#00FF7F', '#6495ED', '#FFA07A'];
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            const size = Math.random() * 50 + 50;
+            balloon.style.width = `${size}px`;
+            balloon.style.height = `${size}px`;
+            balloon.style.left = Math.random() * window.innerWidth + 'px';
+            balloon.style.bottom = '0px';
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(balloon);
+
+            const flightDuration = Math.random() * 10000 + 5000;
+            const initialSize = size;
+            const targetSize = Math.random() * 50 + 50;
+
+            const initialColor = balloon.style.backgroundColor;
+            const targetColor = colors[Math.floor(Math.random() * colors.length)];
+
+            const keyframes = `
+                @keyframes fly {
+                    0% {
+                        bottom: 0;
+                        width: ${initialSize}px;
+                        height: ${initialSize}px;
+                        background-color: ${initialColor};
+                    }
+                    50% {
+                        width: ${targetSize}px;
+                        height: ${targetSize}px;
+                        background-color: ${targetColor};
+                    }
+                    100% {
+                        bottom: ${window.innerHeight}px;
+                        width: ${initialSize}px;
+                        height: ${initialSize}px;
+                        background-color: ${initialColor};
+                    }
+                }
+            `;
+
+            const style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = keyframes;
+            document.head.appendChild(style);
+
+            balloon.style.animation = `fly ${flightDuration}ms linear`;
+            balloon.addEventListener('animationend', () => {
+                document.body.removeChild(balloon);
+            });
+        }
+
+        for (let i = 0; i < numBalloons; i++) {
+            setTimeout(createBalloon, i * 1000);
+        }
+    </script>
+</body>
+
+</html>
