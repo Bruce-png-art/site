@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>百万气球</title>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+      background-color: #e5f6ff;
+    }
+
+   .balloon {
+      position: absolute;
+      width: 50px;
+      height: 60px;
+      background-color: #ff6b6b;
+      border-radius: 50%;
+      animation: float 10s infinite linear;
+      box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+   .balloon::before {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background-color: #333;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -100px;
+        transform: translateX(0);
+      }
+
+      100% {
+        bottom: 100vh;
+        transform: translateX(200px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="balloon-container"></div>
+  <script>
+    const container = document.getElementById('balloon-container');
+    const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#1dd1a1', '#5f27cd'];
+    const numBalloons = 100;
+
+    for (let i = 0; i < numBalloons; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      balloon.style.left = Math.random() * window.innerWidth + 'px';
+      balloon.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      container.appendChild(balloon);
+    }
+  </script>
+</body>
+
+</html>
+    
