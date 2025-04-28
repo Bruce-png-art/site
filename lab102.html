@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>百万气球</title>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+      background-color: #e5f6ff;
+    }
+
+   .balloon {
+      position: absolute;
+      width: 50px;
+      height: 60px;
+      background-color: #ff6b6b;
+      border-radius: 50%;
+      box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+   .balloon::before {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background-color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="balloon-container"></div>
+  <script>
+    const container = document.getElementById('balloon-container');
+    const colors = ['red', 'orange', 'yellow', 'green', 'black', 'blue', 'purple'];
+    const numBalloons = 100;
+    const burstHeight = window.innerHeight * 0.8;
+
+    for (let i = 0; i < numBalloons; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      balloon.style.left = Math.random() * window.innerWidth + 'px';
+      const startSize = Math.random() * 20 + 30;
+      balloon.style.width = startSize + 'px';
+      balloon.style.height = startSize * 1.2 + 'px';
+      const animationDuration = (Math.random() * 5 + 5) + 's';
+      balloon.animate([
+        { bottom: '-100px', width: startSize + 'px', height: startSize * 1.2 + 'px' },
+        { bottom: '100vh', width: (startSize * 1.5) + 'px', height: (startSize * 1.5 * 1.2) + 'px' }
+      ], {
+        duration: parseFloat(animationDuration) * 1000,
+        iterations: 1,
+        easing: 'linear'
+      });
+
+      setTimeout(() => {
+        const interval = setInterval(() => {
+          if (parseFloat(getComputedStyle(balloon).bottom) > burstHeight) {
+            balloon.remove();
+            clearInterval(interval);
+          }
+        }, 100);
+      }, parseFloat(animationDuration) * 1000 * (i / numBalloons));
+
+      container.appendChild(balloon);
+    }
+  </script>
+</body>
+
+</html>
+    
