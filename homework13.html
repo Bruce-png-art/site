@@ -1,0 +1,199 @@
+from flask import Flask, render_template_string, request, redirect, url_for
+import string
+import random
+import os
+
+app = Flask(__name__)
+
+# 生成随机签到码
+def generate_random_code(length=10):
+    characters = string.ascii_lowercase + string.digits
+    return ''.join(random.choice(characters) for i in range(length))
+
+# 初始化或读取签到码文件
+def initialize_codes_file():
+    if not os.path.exists('codes.txt'):
+        codes = [generate_random_code() for _ in range(100)]
+        with open('codes.txt', 'w') as f:
+            for code in codes:
+                f.write(f"{code} 0\n")
+        return codes
+    else:
+        with open('codes.txt', 'r') as f:
+            lines = f.readlines()
+        codes = [line.split()[0] for line in lines]
+        return codes
+
+# 读取签到状态
+def read_attendance_status():
+    if not os.path.exists('codes.txt'):
+        return {}
+    with open('codes.txt', 'r') as f:
+        lines = f.readlines()
+    status = {}
+    for line in lines:
+        parts = line.strip().split()
+        if len(parts) >= 2:
+            status[parts[0]] = parts[1]
+    return status
+
+# 保存签到状态
+def save_attendance_status(status):
+    with open('codes.txt', 'w') as f:
+        for code, sid in status.items():
+            f.write(f"{code} {sid}\n")
+
+# 教师生成签到码页面
+@app.route('/codes')
+def generate_codes():
+    codes = initialize_codes_file()
+    # 将100个码分成20行5列
+    code_grid = [codes[i*5:(i+1)*5] for i in range(20)]
+    return render_template_string('''
+<!DOCTYPE html>
+<html>
+<head>
+    <title>签到码列表</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>签到码列表</h1>
+    <table>
+        {% for row in code_grid %}
+        <tr>
+            {% for code in row %}
+            <td>{{ code }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <p style="text-align: center;">请打印此页面并分发给学生</p>
+</body>
+</html>
+''', code_grid=code_grid)
+
+# 学生签到页面
+@app.route('/signin')
+def sign_in_form():
+    return render_template_string('''
+<!DOCTYPE html>
+<html>
+<head>
+    <title>学生签到</title>
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>学生签到</h2>
+        <form method="post" action="/verify">
+            <label for="sid">学生ID:</label>
+            <input type="text" id="sid" name="sid" required>
+            
+            <label for="code">签到码:</label>
+            <input type="text" id="code" name="code" required>
+            
+            <button type="submit">签到</button>
+        </form>
+    </div>
+</body>
+</html>
+''')
+
+# 验证签到码
+@app.route('/verify', methods=['GET', 'POST'])
+def verify_code():
+    if request.method == 'POST':
+        sid = request.form.get('sid')
+        code = request.form.get('code')
+    else:  # GET请求
+        sid = request.args.get('sid')
+        code = request.args.get('code')
+    
+    if not sid or not code:
+        return "错误: 缺少学生ID或签到码", 400
+    
+    status = read_attendance_status()
+    
+    if code not in status:
+        return "错误: 输入的签到码不正确"
+    
+    signed_sid = status[code]
+    
+    if signed_sid == '0':
+        status[code] = sid
+        save_attendance_status(status)
+        return "签到成功"
+    elif sid == signed_sid:
+        return "你已经签到过了"
+    else:
+        return f"该签到码已被 {signed_sid} 使用，不能共享"
+
+# 查看已签到学生列表
+@app.route('/attended')
+def view_attended():
+    status = read_attendance_status()
+    attended = [sid for code, sid in status.items() if sid != '0']
+    
+    return render_template_string('''
+<!DOCTYPE html>
+<html>
+<head>
+    <title>已签到学生列表</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>已签到学生列表</h2>
+        <pre>{{ attended_list }}</pre>
+    </div>
+</body>
+</html>
+''', attended_list='\n'.join(attended))
+
+if __name__ == '__main__':
+    app.run(debug=True)    
